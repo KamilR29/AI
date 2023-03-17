@@ -120,7 +120,7 @@ public class Main {
 
         }
 
-        
+
         int yes = 0;
         int no = 0;
         for (ResultVector element:list) {
