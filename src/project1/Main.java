@@ -7,6 +7,11 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
+        intro();
+
+    }
+    public static void intro() throws FileNotFoundException{
+
         boolean isEnd = true;
         while (isEnd){
             Scanner dataR = new Scanner(System.in);
@@ -120,14 +125,14 @@ public class Main {
 
         }
 
+        FinalVector finalVector = new FinalVector();
 
-        int yes = 0;
-        int no = 0;
         for (ResultVector element:list) {
+
             if(element.name.equals(testVector[testVector.length-1])){
-                yes++;
+
             }else {
-                no++;
+
             }
 
         }
@@ -158,5 +163,18 @@ class ResultVector implements Comparable<ResultVector>{
     @Override
     public int compareTo(ResultVector r) {
         return Double.compare(this.getV(), r.getV());
+    }
+}
+class FinalVector{
+
+    String mane;
+    int count;
+
+    public FinalVector(String mane, int count) {
+        this.mane = mane;
+        this.count = count;
+    }
+    public FinalVector(){
+
     }
 }
