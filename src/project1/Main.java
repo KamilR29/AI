@@ -81,9 +81,11 @@ public class Main {
     }
     public static int knn(String dataTest, int k, String fileName) throws FileNotFoundException {
 
+
         Scanner scanner = new Scanner(new File(fileName+".data"));
+
         ArrayList<ResultVector> list = new ArrayList<>();
-        ArrayList list1 = new ArrayList();
+
 
 
         String[] testVector = dataTest.split(",");
@@ -106,8 +108,7 @@ public class Main {
             resultV = Math.sqrt(resultV);
 
 
-            list1.add(resultV);
-            
+
 
 
             if(list.size()<k){
@@ -125,18 +126,33 @@ public class Main {
 
         }
 
-        FinalVector finalVector = new FinalVector();
+
+
+
+        Map<String,Integer> map = new TreeMap<>();
+
+
 
         for (ResultVector element:list) {
 
-            if(element.name.equals(testVector[testVector.length-1])){
-
+            if(map.containsKey(element.name)){
+                map.put(element.name, map.get(element.name)+1);
             }else {
-
+                map.put(element.name,1);
             }
 
         }
-        if (yes>= no){
+
+
+        int max = 0;
+        String result = "";
+        for (Map.Entry<String,Integer> e:map.entrySet()) {
+            if(e.getValue() > max){
+                max = e.getValue();
+                result = e.getKey();
+            }
+        }
+        if (testVector[testVector.length-1].equals(result)){
             return 1;
 
         }else {
@@ -163,18 +179,5 @@ class ResultVector implements Comparable<ResultVector>{
     @Override
     public int compareTo(ResultVector r) {
         return Double.compare(this.getV(), r.getV());
-    }
-}
-class FinalVector{
-
-    String mane;
-    int count;
-
-    public FinalVector(String mane, int count) {
-        this.mane = mane;
-        this.count = count;
-    }
-    public FinalVector(){
-
     }
 }
