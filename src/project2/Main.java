@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
-        String fileName = intro();
-//        String fileName = "perceptron";
+//        String fileName = intro();
+        String fileName = "wdbc";
 
         String aVariable;
         ArrayList<Double> weightVector;
@@ -25,7 +25,7 @@ public class Main {
         Double maxIterationError = 0.05;
         Integer iterator = 1;
 
-        Scanner scanner = new Scanner(new File("perceptron.data"));
+        Scanner scanner = new Scanner(new File(path));
         String line = scanner.nextLine();
         String[] lines = line.split(",");
         ArrayList<Double> inputVector = convertToVector(lines);
