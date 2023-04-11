@@ -1,4 +1,4 @@
-package project2;
+package Perceptron;
 
 import java.util.ArrayList;
 

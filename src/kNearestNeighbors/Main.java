@@ -1,4 +1,4 @@
-package project1;
+package kNearestNeighbors;
 
 import java.io.File;
 import java.io.FileNotFoundException;

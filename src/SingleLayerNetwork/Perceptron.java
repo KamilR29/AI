@@ -1,4 +1,4 @@
-package project2;
+package SingleLayerNetwork;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,7 +34,7 @@ public class Perceptron {
         if (net>=0){
             return 1;
         }
-            return 0;
+        return 0;
 
     }
     public static ArrayList<Double> recountWeightVector(ArrayList<Double> weightVector, Double alpha, Integer predicted, Integer output, ArrayList<Double> inputVector ){
@@ -64,3 +64,4 @@ public class Perceptron {
 
 
 }
+

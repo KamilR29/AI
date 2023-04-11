@@ -1,4 +1,4 @@
-package project2;
+package SingleLayerNetwork;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
-//        String fileName = intro();
-        String fileName = "wdbc";
+        String fileName = intro();
+//        String fileName = "wdbc";
 
         String aVariable;
         ArrayList<Double> weightVector;
