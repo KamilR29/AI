@@ -87,44 +87,45 @@ public class Perceptron {
         }
         return resultSets;
     }
-    public static ReturnSet activatePerceptron(String path, Double theta, ArrayList<Double> weightVector, String aVariable, Double alpha) throws FileNotFoundException {
+//    public static ReturnSet activatePerceptron(Object inputVector, Double theta, ArrayList<Double> weightVector, String aVariable, Double alpha) throws FileNotFoundException {
+//
+//
+//        String[]lines;
+//
+//        Integer output;
+//        Integer predicted;
+//        ArrayList<ResultSet> resultSets = new ArrayList<>();
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//            output = Perceptron.countOutput(theta,weightVector, (ArrayList<Double>) inputVector);
+//
+//            if(lines[lines.length-1].equals(aVariable)){
+//                predicted = 1;
+//            }else {
+//                predicted = 0;
+//            }
+//
+//            resultSets.add(new ResultSet(output,predicted));
+//            weightVector = Perceptron.recountWeightVector(weightVector,alpha,predicted,output,inputVector);
+//            theta = Perceptron.recountTheta(theta,alpha,predicted,output);
+//
+//
+//
+//
+//        ReturnSet returnSet = new ReturnSet(resultSets,theta,weightVector);
+//
+//        return returnSet;
+//
+//    }
 
-        String line;
-        String[]lines;
-        ArrayList<Double> inputVector;
-        Integer output;
-        Integer predicted;
-        ArrayList<ResultSet> resultSets = new ArrayList<>();
 
-        Scanner scanner = new Scanner(new File(path));
-
-        while (scanner.hasNext()){
-
-            line = scanner.nextLine();
-            lines = line.split(",");
-            inputVector = convertToVector(lines);
-
-            output = Perceptron.countOutput(theta,weightVector,inputVector);
-
-            if(lines[lines.length-1].equals(aVariable)){
-                predicted = 1;
-            }else {
-                predicted = 0;
-            }
-
-            resultSets.add(new ResultSet(output,predicted));
-            weightVector = Perceptron.recountWeightVector(weightVector,alpha,predicted,output,inputVector);
-            theta = Perceptron.recountTheta(theta,alpha,predicted,output);
-
-
-        }
-
-
-        ReturnSet returnSet = new ReturnSet(resultSets,theta,weightVector);
-
-        return returnSet;
-
-    }
     public static Double checkIterationError(ArrayList<ResultSet> resultSets){
         Double iterationError = 0.0;
         for (int i = 0; i < resultSets.size(); i++) {
