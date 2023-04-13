@@ -1,4 +1,5 @@
-package SingleLayerNetwork;
+package PerceptronRebuilt;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -147,4 +148,3 @@ public class Perceptron {
 
 
 }
-

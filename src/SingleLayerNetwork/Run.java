@@ -3,63 +3,79 @@ package SingleLayerNetwork;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
-public class Perceptron {
-
-
-
-    public static ArrayList<Double> initializeWeightVector(Integer size){
-        ArrayList<Double> weightsVector = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i <size ; i++) {
-            weightsVector.add(random.nextDouble());
-        }
-        return weightsVector;
-    }
-    public static Double initializeTheta(){
-        double theta;
-        Random random = new Random();
-        theta = random.nextDouble();
-        return theta;
+public class Run {
+    public Run() {
     }
 
-    public static int countOutput(Double theta, ArrayList<Double> weightsVector, ArrayList<Double> inputVector){
+    public void run(String fileName) throws FileNotFoundException {
 
-        Double net = 0.0;
+//        String fileName = intro();
+//        String fileName = "wdbc";
 
-        for (int i = 0; i < weightsVector.size(); i++) {
-            net += weightsVector.get(i)*inputVector.get(i);
+        String aVariable;
+        ArrayList<Double> weightVector;
+        Double theta;
+        Double alpha;
+
+        String path = fileName;
+        String testPath = fileName;
+        Double iterationError;
+        ReturnSet returnSet;
+        Double maxIterationError = 0.05;
+        Integer iterator = 1;
+
+        Scanner scanner = new Scanner(new File(path));
+        String line = scanner.nextLine();
+        String[] lines = line.split(",");
+
+
+
+
+        //set class name to 1, if second cals have different name set to 0
+        aVariable = lines[lines.length-1];
+        //initialize weight Vector
+        weightVector = Perceptron.initializeWeightVector(lines.length-1);
+        //initialize theta
+        theta = Perceptron.initializeTheta();
+        //initialize alpha
+        alpha = 0.001;
+
+
+        returnSet = activatePerceptron(path,theta,weightVector,aVariable,alpha);
+
+        iterationError = checkIterationError(returnSet.resultSets);
+
+
+
+        while (iterationError>=maxIterationError && iterator < 1000){
+
+            returnSet = activatePerceptron(path, returnSet.theta, returnSet.weightVector,aVariable,alpha);
+            iterationError = checkIterationError(returnSet.resultSets);
+
+
+            iterator++;
         }
-        net -=theta;
 
-        if (net>=0){
-            return 1;
+        theta = returnSet.theta;
+        weightVector = returnSet.weightVector;
+
+        ArrayList<ResultSet> result = testPerceptron(testPath,theta,weightVector,aVariable);
+        System.out.println("============");
+        for (ResultSet element : result) {
+            System.out.println(element.output+" - "+element.predicted);
         }
-        return 0;
-
-    }
-    public static ArrayList<Double> recountWeightVector(ArrayList<Double> weightVector, Double alpha, Integer predicted, Integer output, ArrayList<Double> inputVector ){
-
-        ArrayList<Double> newWeightVector = new ArrayList<>();
-        Double delta = alpha*(predicted-output);
-        ArrayList<Double> tmpVector = new ArrayList<>();
-        for (int i = 0; i < inputVector.size(); i++) {
-            tmpVector.add(inputVector.get(i) * delta);
-        }
-        for (int i = 0; i < weightVector.size(); i++) {
-            newWeightVector.add(weightVector.get(i)+tmpVector.get(i));
-        }
-
-        return newWeightVector;
-
-    }
-    public  static Double recountTheta(Double theta ,Double alpha, Integer predicted, Integer output){
+        System.out.println("============");
+        iterationError = checkIterationError(result);
+        System.out.println("Finalny blad: "+iterationError);
+        System.out.println("Epoki: "+iterator);
+        System.out.println("============");
 
 
-        Double newTheta = theta - alpha * (predicted - output);
-        return newTheta;
+
+
+
 
     }
     public static ArrayList<ResultSet> testPerceptron(String path, Double theta, ArrayList<Double> weightVector, String aVariable) throws FileNotFoundException {
@@ -142,9 +158,18 @@ public class Perceptron {
         }
         return inputVector;
     }
+    public static String intro(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj nazwe pliku: ");
+        System.out.print(">");
+        String line = scanner.nextLine();
+        return line;
+    }
+    public static void readFile(){
+
+    }
 
 
 
 
 }
-
